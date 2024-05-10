@@ -1,4 +1,4 @@
-package Lab_01.Anexo01;
+package Anexo01;
 
 public class Cajera {
 
