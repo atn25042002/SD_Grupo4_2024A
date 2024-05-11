@@ -63,8 +63,6 @@ public class BerkeleyClock {
                     }
 
                     // Sending current time to master clock
-                    //serverClock.setTime(currentTime);
-                    //serverClock.addDifferenceTime(clientClock.getTime());
                     int diffN= serverClock.addDifferenceTime(clientClock.getTime());
                     System.out.println("Thread " + Thread.currentThread().getId() +  ": Client clock id-" + clientClock.getId() + " difference is " + diffN);
                 }
@@ -86,7 +84,6 @@ public class BerkeleyClock {
         int serverTime = serverClock.getTime();
         int nclients = clientClocks.size();
         int diffAverage = serverClock.getTotalDifferenceTime() / (nclients + 1);
-        //int diff= 0;
         for (BerkeleyClock clientClock : clientClocks) {
             int diffR= diffAverage - clientClock.getTime() + serverTime;
             clientClock.setTime(clientClock.getTime() + diffR);
