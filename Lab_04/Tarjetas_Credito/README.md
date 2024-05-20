@@ -82,9 +82,3 @@ El cliente presenta un menú con las siguientes opciones:
 
 - **Exception: java.rmi.ConnectException**: Asegúrate de que el registro RMI esté ejecutándose y que el puerto especificado sea correcto.
 - **ClassNotFoundException**: Verifica que todas las clases estén correctamente compiladas y ubicadas en el directorio correcto.
-
-## Contacto
-
-Para cualquier pregunta o problema, por favor contacta al desarrollador en: [tu_email@ejemplo.com]
-
----
