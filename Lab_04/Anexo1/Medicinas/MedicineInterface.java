@@ -1,5 +1,3 @@
-package Medicinas;
-
 import java.rmi.Remote;
 
 public interface MedicineInterface extends Remote {

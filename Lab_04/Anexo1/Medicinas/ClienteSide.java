@@ -1,5 +1,3 @@
-package Medicinas;
-
 import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.Scanner;

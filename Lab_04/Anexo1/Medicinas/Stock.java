@@ -1,5 +1,3 @@
-package Medicinas;
-
 import java.util.HashMap;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

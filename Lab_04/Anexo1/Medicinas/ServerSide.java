@@ -1,5 +1,3 @@
-package Medicinas;
-
 import java.rmi.*;
 
 public class ServerSide {
