@@ -13,7 +13,7 @@ Este proyecto implementa un sistema simple de tarjetas de crédito utilizando Ja
 ## Pasos para Compilar y Ejecutar
 
 1. **Abre una terminal.**
-2. **Navega al directorio del proyecto (SD_GRUPO4_2024A).**
+2. **Navega al directorio del proyecto: SD_GRUPO4_2024A.**
 3. **Compila todas las clases del proyecto:**
 
    ```sh
