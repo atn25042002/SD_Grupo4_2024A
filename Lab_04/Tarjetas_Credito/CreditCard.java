@@ -3,6 +3,7 @@ package Lab_04.Tarjetas_Credito;
 import java.time.LocalDate;
 
 public class CreditCard {
+    //Clase Tarjetas de Credito
     private String cardNumber;
     private String cardHolderName;
     private LocalDate expirationDate;
@@ -11,6 +12,7 @@ public class CreditCard {
     private double creditLimit;
 
     public CreditCard(String cardNumber, String cardHolderName, LocalDate expirationDate, String cvv, double balance, double creditLimit) {
+        //Constructor
         this.cardNumber = cardNumber;
         this.cardHolderName = cardHolderName;
         this.expirationDate = expirationDate;
@@ -19,6 +21,7 @@ public class CreditCard {
         this.creditLimit = creditLimit;
     }
 
+    //Metodos Get
     public String getCardNumber() {
         return cardNumber;
     }
@@ -47,7 +50,7 @@ public class CreditCard {
         if (balance + amount <= creditLimit) {
             this.balance -= amount;
         } else {
-            System.out.println("Error: Exceeds credit limit");
+            System.out.println("---> Error: Limite de credito excedido");
         }
     }
 
@@ -57,6 +60,7 @@ public class CreditCard {
 
     @Override
     public String toString() {
+        //Datos de la tarjeta de Credito
         return "Numero de tarjeta: " + cardNumber +
                "\nTitular de la tarjeta: " + cardHolderName +
                "\nFecha de expiracion: " + expirationDate +

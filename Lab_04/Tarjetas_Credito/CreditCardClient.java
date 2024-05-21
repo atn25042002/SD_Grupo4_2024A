@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class CreditCardClient {
     public static void main(String[] args) {
         try {
+            //Inicia el servicio de Tarjetas de Creditos
             CreditCardServiceInterface service = (CreditCardServiceInterface) Naming.lookup("rmi://localhost:1099/CreditCardService");
 
             Scanner scanner = new Scanner(System.in);
@@ -25,7 +26,7 @@ public class CreditCardClient {
                 System.out.print("- Ingrese la operacion que desea ejecutar: ");
                 int choice = scanner.nextInt();
 
-                if(choice == 6){
+                if(choice == 6){ //Opcion 6 - Salir
                     System.out.println("---> Saliendo...");
                     break;
                 }
@@ -34,26 +35,27 @@ public class CreditCardClient {
                 String cardNumber = scanner.next();
 
                 boolean validCard= service.existsCreditCard(cardNumber);
-                if(choice <5){                    
+                if(choice <5){
+                    //Estos metodos requieren que el numero de tarjeta sea valido              
                     if(validCard){
                         switch (choice) {
-                            case 1:
+                            case 1: // Autorizar transaccion
                                 System.out.print("Ingrese el monto a autorizar: ");
                                 double amount = scanner.nextDouble();
                                 boolean authorized = service.authorizeTransaction(cardNumber, amount);
                                 System.out.println("---> Transaccion autorizada: " + authorized);
                                 break;
-                            case 2:
+                            case 2: //Consultar saldo
                                 double balance = service.getBalance(cardNumber);
                                 System.out.println("---> Saldo Actual: " + balance);
                                 break;
-                            case 3:
+                            case 3: // Agregar fondos
                                 System.out.print("Ingrese el monto a agregar: ");
                                 double funds = scanner.nextDouble();
                                 boolean added = service.addFunds(cardNumber, funds);
                                 System.out.println("---> Fondos agregados: " + added);
                                 break;
-                            case 4:
+                            case 4: // Mostrar detalles de la tarjeta
                                 String details = service.printCardDetails(cardNumber);
                                 System.out.println("---> Mostrando Detalles:");
                                 System.out.println(details);
@@ -65,8 +67,9 @@ public class CreditCardClient {
                         System.out.println("---> Tarjeta no encontrada");
                     }
                 }else{
+                    //Tarjeta nueva - Opcion 5
                     System.out.print("- Ingrese el nombre del titular: ");
-                    scanner.nextLine(); // Consume newline
+                    scanner.nextLine(); // Leyendo nombre del titular
                     String cardHolderName = scanner.nextLine();
                     System.out.print("- Ingrese la fecha de expiración (YYYY-MM-DD): ");
                     LocalDate expirationDate = LocalDate.parse(scanner.next());
@@ -79,6 +82,7 @@ public class CreditCardClient {
                     service.addCreditCard(cardNumber, cardHolderName, expirationDate, cvv, initialBalance, creditLimit);
                     System.out.println("---> Tarjeta de crédito agregada exitosamente.");
                 }
+                //Confirmacion para realiar otra operacion
                 System.out.print("¿Desea realizar otra operación? (y/n): ");
                 String opcion= scanner.next();
                 if(!opcion.equals("y")){
@@ -89,14 +93,6 @@ public class CreditCardClient {
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
-        }
-    }
-
-    public void mostrarResultado(boolean valid, String message){
-        if(valid){
-            System.out.println(message);
-        }else{
-            System.out.println("Tarjeta no encontrada");
         }
     }
 }
