@@ -2,6 +2,7 @@ package Lab_04.Tarjetas_Credito;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +13,9 @@ public class CreditCardServiceImpl extends UnicastRemoteObject implements Credit
         super();
         cardDatabase = new HashMap<>();
         // Inicializa algunas tarjetas de crédito con saldo
-        cardDatabase.put("1234-5678-9012-3456", new CreditCard("1234-5678-9012-3456", 500.00));
-        cardDatabase.put("9876-5432-1098-7654", new CreditCard("9876-5432-1098-7654", 1000.00));
+        cardDatabase.put("1234", new CreditCard("1234", "Juan Perez", LocalDate.of(2025, 12, 31), "123", 5000.00, 10000.00));
+        cardDatabase.put("5678", new CreditCard("5678", "Maria Lopez", LocalDate.of(2024, 6, 30), "456", 3000.00, 7000.00));
+        cardDatabase.put("3456", new CreditCard("3456", "Carlos Ramirez", LocalDate.of(2023, 11, 30), "789", 2000.00, 5000.00));
     }
 
     @Override
@@ -51,37 +53,17 @@ public class CreditCardServiceImpl extends UnicastRemoteObject implements Credit
         if (card != null) {
             return card.toString();
         }
-        return "Tarjeta no encontrada";
-    }
-}
-
-class CreditCard {
-    private String cardNumber;
-    private double balance;
-
-    public CreditCard(String cardNumber, double balance) {
-        this.cardNumber = cardNumber;
-        this.balance = balance;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void debit(double amount) {
-        this.balance -= amount;
-    }
-
-    public void credit(double amount) {
-        this.balance += amount;
+        return "---> Tarjeta no encontrada";
     }
 
     @Override
-    public String toString() {
-        return "Numero de tarjeta: " + cardNumber + "\nSaldo: " + balance;
+    public void addCreditCard(String cardNumber, String cardHolderName, LocalDate expirationDate, String cvv, double balance, double creditLimit) throws RemoteException {
+        CreditCard newCard = new CreditCard(cardNumber, cardHolderName, expirationDate, cvv, balance, creditLimit);
+        cardDatabase.put(cardNumber, newCard);
+    }
+
+    @Override
+    public boolean existsCreditCard(String cardNumber) throws RemoteException {
+        return cardDatabase.get(cardNumber) != null;
     }
 }
