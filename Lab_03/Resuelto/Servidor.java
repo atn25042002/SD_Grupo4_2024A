@@ -9,6 +9,7 @@ public class Servidor {
 			ServerSocket skServidor = new ServerSocket(PUERTO);
 			System.out.println("Escucho el puerto " + PUERTO);
 			for (int numCli = 0; numCli < 3; numCli++) {
+				System.out.println("Esperando cliente " + numCli);
 				Socket skCliente = skServidor.accept(); // Crea objeto
 				System.out.println("Sirvo al cliente " + numCli);
 				OutputStream aux = skCliente.getOutputStream();

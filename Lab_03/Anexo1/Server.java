@@ -87,63 +87,58 @@ public class Server {
     }
 
     // to broadcast a message to all Clients
-private synchronized boolean broadcast(String message) {
-// add timestamp to the message
-String time = sdf.format(new Date());
-// to check if message is private i.e. client to client message
-String[] w = message.split(" ",3);
-boolean isPrivate = false;
-if(w[1].charAt(0)=='@') 
-isPrivate=true;
-// if private message, send message to mentioned username only
-if(isPrivate==true)
-{
-String tocheck=w[1].substring(1, w[1].length());
-message=w[0]+w[2];
-String messageLf = time + " " + message + "\n";
-boolean found=false;
-// we loop in reverse order to find the mentioned username
-for(int y=al.size(); --y>=0;)
-{
-ClientThread ct1=al.get(y);
-String check=ct1.getUsername();
-if(check.equals(tocheck))
-{
-// try to write to the Client if it fails remove it from the list
-if(!ct1.writeMsg(messageLf)) {
-al.remove(y);
-display("Disconnected Client " + ct1.username + " removed from list.");
-}
-// username found and delivered the message
-found=true;
-break;
-}
-}
-// mentioned user not found, return false
-if(found!=true)
-{
-return false; 
-}
-}
-// if message is a broadcast message
-else
-{
-String messageLf = time + " " + message + "\n";
-// display message
-System.out.print(messageLf);
-// we loop in reverse order in case we would have to remove a Client
-// because it has disconnected
-for(int i = al.size(); --i >= 0;) {
-ClientThread ct = al.get(i);
-// try to write to the Client if it fails remove it from the list
-if(!ct.writeMsg(messageLf)) {
-al.remove(i);
-display("Disconnected Client " + ct.username + " removed from list.");
-}
-}
-}
-return true;
-}
+    private synchronized boolean broadcast(String message) {
+        // add timestamp to the message
+        String time = sdf.format(new Date());
+        // to check if message is private i.e. client to client message
+        String[] w = message.split(" ", 3);
+        boolean isPrivate = false;
+        if (w[1].charAt(0) == '@')
+            isPrivate = true;
+        // if private message, send message to mentioned username only
+        if (isPrivate == true) {
+            String tocheck = w[1].substring(1, w[1].length());
+            message = w[0] + w[2];
+            String messageLf = time + " " + message + "\n";
+            boolean found = false;
+            // we loop in reverse order to find the mentioned username
+            for (int y = al.size(); --y >= 0;) {
+                ClientThread ct1 = al.get(y);
+                String check = ct1.getUsername();
+                if (check.equals(tocheck)) {
+                    // try to write to the Client if it fails remove it from the list
+                    if (!ct1.writeMsg(messageLf)) {
+                        al.remove(y);
+                        display("Disconnected Client " + ct1.username + " removed from list.");
+                    }
+                    // username found and delivered the message
+                    found = true;
+                    break;
+                }
+            }
+            // mentioned user not found, return false
+            if (found != true) {
+                return false;
+            }
+        }
+        // if message is a broadcast message
+        else {
+            String messageLf = time + " " + message + "\n";
+            // display message
+            System.out.print(messageLf);
+            // we loop in reverse order in case we would have to remove a Client
+            // because it has disconnected
+            for (int i = al.size(); --i >= 0;) {
+                ClientThread ct = al.get(i);
+                // try to write to the Client if it fails remove it from the list
+                if (!ct.writeMsg(messageLf)) {
+                    al.remove(i);
+                    display("Disconnected Client " + ct.username + " removed from list.");
+                }
+            }
+        }
+        return true;
+    }
 
     // if client sent LOGOUT message to exit
     synchronized void remove(int id) {

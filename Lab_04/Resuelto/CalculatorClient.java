@@ -11,7 +11,7 @@ public class CalculatorClient {
         int num2 = Integer.parseInt(args[1]);
 
         try {
-            Calculator c = (Calculator) Naming.lookup("rmi://localhost/CalculatorService");
+            Calculator c = (Calculator) Naming.lookup("rmi://localhost:1099/CalculatorService");
             System.out.println( "The substraction of "+num1 +" and "+num2 +" is: "+ c.sub(num1, num2) );
             System.out.println( "The addition of "+num1 +" and "+ num2 +"is: "+c.add(num1, num2) );
             System.out.println( "The multiplication of "+num1 +" and "+num2 +" is: "+c.mul(num1, num2) );

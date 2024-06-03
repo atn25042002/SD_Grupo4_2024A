@@ -1,1 +1,5 @@
 *.class
+/Lab_05/ComprasDeProducto/target/
+/Lab_05/ComprasDeProducto/nbproject/private/
+/Lab_05/ComprasDeProducto/build/
+/Lab_05/ComprasDeProducto/dist/
