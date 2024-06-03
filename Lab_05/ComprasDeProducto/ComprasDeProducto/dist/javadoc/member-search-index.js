@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"compra.productos","c":"compraproductos","l":"compraproductos()","u":"%3Cinit%3E()"},{"p":"compra.productos","c":"compraproductos","l":"comprasProductos(int, int, int, int)","u":"comprasProductos(int,int,int,int)"},{"p":"compra.productos","c":"compraproductos","l":"hello(String)","u":"hello(java.lang.String)"}];updateSearchResults();
