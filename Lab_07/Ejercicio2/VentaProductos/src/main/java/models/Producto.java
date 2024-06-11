@@ -18,14 +18,13 @@ public class Producto implements Serializable {
     private double precio;
     private int cantidadEnStock;
     private String categoria;
-    private String sku; // Código de referencia del producto
     private String fabricante;
     
     // Lista de productos de ejemplo
     public static List<Producto> productos = new ArrayList<>(Arrays.asList(
-        new Producto("1", "Rosa", "Rosa de color marfil", 5.99, 100, "Flores", "SKU123", "Floristeria XYZ"),
-        new Producto("2", "Pepito", "Pepito de juguete", 3.49, 200, "Juguetes", "SKU456", "Jugueteria ABC"),
-        new Producto("3", "Manuela", "Manuela de peluche", 7.99, 150, "Peluche", "SKU789", "Peluche Ltd.")
+        new Producto("1", "Rosa", "Rosa de color marfil", 5.99, 100, "Flores","Floristeria XYZ"),
+        new Producto("2", "Pepito", "Pepito de juguete", 3.49, 200, "Juguetes", "Jugueteria ABC"),
+        new Producto("3", "Oso", "Oso de peluche", 7.99, 150, "Peluche", "Peluche Ltd.")
     ));
     
     // Constructor vacío
@@ -34,7 +33,7 @@ public class Producto implements Serializable {
     }
 
     // Constructor con parámetros
-    public Producto(String idProducto, String nombre, String descripcion, double precio, int cantidadEnStock, String categoria, String sku, String fabricante) {
+    public Producto(String idProducto, String nombre, String descripcion, double precio, int cantidadEnStock, String categoria, String fabricante) {
         super();
         this.idProducto = idProducto;
         this.nombre = nombre;
@@ -42,7 +41,6 @@ public class Producto implements Serializable {
         this.precio = precio;
         this.cantidadEnStock = cantidadEnStock;
         this.categoria = categoria;
-        this.sku = sku;
         this.fabricante = fabricante;
     }
 
@@ -95,14 +93,6 @@ public class Producto implements Serializable {
         this.categoria = categoria;
     }
 
-    public String getSku() {
-        return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
     public String getFabricante() {
         return fabricante;
     }
@@ -123,7 +113,6 @@ public class Producto implements Serializable {
     
     // Método para eliminar un producto de la lista por ID
     public static void deleteProducto(String idProducto) {
-    	System.out.print("Eleiminando " + idProducto);
         productos.removeIf(p -> p.getIdProducto().equals(idProducto));
     }
     

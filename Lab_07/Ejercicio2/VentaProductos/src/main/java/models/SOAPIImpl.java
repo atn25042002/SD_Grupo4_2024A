@@ -33,7 +33,6 @@ public class SOAPIImpl implements SOAPI {
 
     @Override
     public void deleteProducto(@WebParam(name = "idProducto") String idProducto) {
-    	System.out.print("Eleiminando " + idProducto);
     	Producto.deleteProducto(idProducto);
     }
 }
