@@ -1,6 +1,8 @@
 package com.grupoc4.gestionEmpresa.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.RowMapper;
@@ -36,21 +38,48 @@ public class DepartamentoRepository {
 
     public Departamento findById(int id) {
         String sql = "SELECT * FROM Departamentos WHERE IDDpto = ?";
-        return jdbcTemplate.queryForObject(sql, new DepartamentoMapper(), id);
+        try {
+            return jdbcTemplate.queryForObject(sql, new DepartamentoMapper(), id);
+        } catch (EmptyResultDataAccessException e) {
+            return new Departamento();
+        }
     }
 
-    public int save(Departamento departamento) {
-        String sql = "INSERT INTO Departamentos (Nombre, Telefono, Fax) VALUES (?, ?, ?)";
-        return jdbcTemplate.update(sql, departamento.getNombre(), departamento.getTelefono(), departamento.getFax());
+    public Departamento save(Departamento departamento) {
+        String sql = "INSERT INTO Departamentos (Nombre, Telefono, Fax) VALUES (?, ?, ?) RETURNING IDDpto";
+        try {
+            int lid= jdbcTemplate.queryForObject(sql, Integer.class ,departamento.getNombre(), departamento.getTelefono(), departamento.getFax());
+            return findById(lid);
+        } catch (DataAccessException e) {
+            return new Departamento();
+        }        
     }
 
-    public int update(Departamento departamento) {
+    public Departamento update(Departamento departamento) {
         String sql = "UPDATE Departamentos SET Nombre = ?, Telefono = ?, Fax = ? WHERE IDDpto = ?";
-        return jdbcTemplate.update(sql, departamento.getNombre(), departamento.getTelefono(), departamento.getFax(), departamento.getId());
+        try {
+            int lid= jdbcTemplate.update(sql, departamento.getNombre(), departamento.getTelefono(), departamento.getFax(), departamento.getId());
+            Departamento response= findById(departamento.getId());
+            if(lid > 0){
+                return response;
+            }
+            return new Departamento();
+        } catch (DataAccessException e) {
+            return new Departamento();
+        } 
     }
 
-    public int deleteById(int id) {
+    public Departamento deleteById(int id) {
         String sql = "DELETE FROM Departamentos WHERE IDDpto = ?";
-        return jdbcTemplate.update(sql, id);
+        try {
+            Departamento response= findById(id);
+            int lid= jdbcTemplate.update(sql, id);
+            if(lid > 0){
+                return response;
+            }
+            return new Departamento();
+        } catch (DataAccessException e) {
+            return new Departamento();
+        }         
     }
 }

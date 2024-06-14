@@ -24,15 +24,15 @@ public class DepartamentoService {
         return departamentoRepository.findById(id);
     }
 
-    public int saveDepartamento(Departamento departamento) {
+    public Departamento saveDepartamento(Departamento departamento) {
         return departamentoRepository.save(departamento);
     }
 
-    public int updateDepartamento(Departamento departamento) {
+    public Departamento updateDepartamento(Departamento departamento) {
         return departamentoRepository.update(departamento);
     }
 
-    public int deleteDepartamentoById(int id) {
+    public Departamento deleteDepartamentoById(int id) {
         return departamentoRepository.deleteById(id);
     }
 }

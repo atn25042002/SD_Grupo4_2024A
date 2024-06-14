@@ -27,17 +27,18 @@ public class DepartamentoController {
     }
 
     @PostMapping("")
-    public int createDepartamento(@RequestBody Departamento departamento) {
+    public Departamento createDepartamento(@RequestBody Departamento departamento) {
         return departamentoService.saveDepartamento(departamento);
     }
 
-    @PutMapping("{id}")
-    public int updateDepartamento(@PathVariable Integer id, @RequestBody Departamento departamento) {
+    @PutMapping("/{id}")
+    public Departamento updateDepartamento(@PathVariable Integer id, @RequestBody Departamento departamento) {
+        departamento.setId(id);
         return departamentoService.updateDepartamento(departamento);
     }
 
     @DeleteMapping("/{id}")
-    public int deleteDepartamentoById(@PathVariable Integer id) {
+    public Departamento deleteDepartamentoById(@PathVariable Integer id) {
         return departamentoService.deleteDepartamentoById(id);
     }
 }
