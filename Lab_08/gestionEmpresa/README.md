@@ -15,14 +15,22 @@
       ./mvnw spring-boot:run
    ```
 
-3. **Conectarse al cliente en**
-
-Ejecuta el servidor para registrar el servicio:
-
+4. **Conectarse en**
 ```sh
 http://localhost:8080/gestionEmpresa/departamentos
 
 http://localhost:8080/gestionEmpresa/proyectos
 
 http://localhost:8080/gestionEmpresa/ingenieros
+```
+
+## Adicionales
+1. **Las sentencias sql que se ejecuan al crear la base de datos estan en**
+```sh
+   init.sql
+```
+
+1. **Para usar PostMan importar las siguientes colecciones**
+```sh
+GestionEmpresa.postman_collection.json
 ```
