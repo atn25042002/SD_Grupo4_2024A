@@ -3,3 +3,18 @@
 /Lab_05/ComprasDeProducto/nbproject/private/
 /Lab_05/ComprasDeProducto/build/
 /Lab_05/ComprasDeProducto/dist/
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
