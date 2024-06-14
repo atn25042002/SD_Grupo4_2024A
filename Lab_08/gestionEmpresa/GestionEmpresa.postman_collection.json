@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "f7776aaa-e890-4cca-a4a4-59cda607cd23",
+		"name": "GestionEmpresa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33408700"
+	},
+	"item": [
+		{
+			"name": "Departamentos",
+			"item": [
+				{
+					"name": "Update departamento",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Departamento Edita\",\n    \"telefono\": \"444-444-444\",\n    \"fax\": \"111-111-111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/gestionEmpresa/departamentos/7"
+					},
+					"response": []
+				},
+				{
+					"name": "Get departamento by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/gestionEmpresa/departamentos/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get departamentos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/gestionEmpresa/departamentos"
+					},
+					"response": []
+				},
+				{
+					"name": "Create departamento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 20,\n    \"nombre\": \"Departamento de Ventas\",\n    \"telefono\": \"123-456-7890\",\n    \"fax\": \"456-789-1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/gestionEmpresa/departamentos"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Departamento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/gestionEmpresa/departamentos/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingenieros",
+			"item": [
+				{
+					"name": "Update departamento",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Editado ing\",\n    \"especialidad\": \"Especialidad editada\",\n    \"cargo\": \"Cargo editado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/gestionEmpresa/ingenieros/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get ingeniero by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/gestionEmpresa/ingenieros/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get ingenieros",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/gestionEmpresa/ingenieros"
+					},
+					"response": []
+				},
+				{
+					"name": "Create ingeniero",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Nuevo Ing\",\n    \"especialidad\": \"Especialidad nueva\",\n    \"cargo\": \"Cargo nuevo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/gestionEmpresa/ingenieros"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Departamento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/gestionEmpresa/ingenieros/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Proyectos",
+			"item": [
+				{
+					"name": "Update proyecto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Sistema Editado\",\n    \"fecInicio\": \"2088-01-01\",\n    \"fecTermino\": \"2088-12-31\",\n    \"idDpto\": 1,\n    \"idIng\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/gestionEmpresa/proyectos/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get proyecto by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/gestionEmpresa/proyectos/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Get proyectos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/gestionEmpresa/proyectos"
+					},
+					"response": []
+				},
+				{
+					"name": "Create proyecto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Transaccion-Id",
+								"value": "ba209999-0c6c-11d2-97cf-00c04f8eea45",
+								"type": "text"
+							},
+							{
+								"key": "Nombre-Aplicacion",
+								"value": "ms-ne-gestion-notificaciones",
+								"type": "text"
+							},
+							{
+								"key": "Usuario-Consumidor-Id",
+								"value": "ANONIMO",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Sistema Nuevo\",\n    \"fecInicio\": \"2000-01-24\",\n    \"fecTermino\": \"2000-12-05\",\n    \"idDpto\": 1,\n    \"idIng\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/gestionEmpresa/proyectos"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Proyecto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/gestionEmpresa/proyectos/4"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
