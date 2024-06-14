@@ -41,7 +41,7 @@ public class IngenieroRepository {
         try {
             return jdbcTemplate.queryForObject(sql, new IngenieroMapper(), id);
         } catch (EmptyResultDataAccessException e) {
-            return null; // Or handle as needed, e.g., throw a custom exception
+            return null;
         }
     }
 

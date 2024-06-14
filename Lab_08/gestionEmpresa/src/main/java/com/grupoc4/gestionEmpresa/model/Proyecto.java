@@ -1,7 +1,6 @@
 package com.grupoc4.gestionEmpresa.model;
 
 import java.sql.Date;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
