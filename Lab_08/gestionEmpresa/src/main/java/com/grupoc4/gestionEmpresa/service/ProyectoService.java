@@ -35,4 +35,8 @@ public class ProyectoService {
     public Proyecto deleteProyectoById(int id) {
         return proyectoRepository.deleteById(id);
     }
+
+    public List<Proyecto> getProyectosByDepartamento(int idDpto) {
+        return proyectoRepository.findByIdDpto(idDpto);
+    }
 }

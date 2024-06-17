@@ -77,4 +77,9 @@ public class ProyectoRepository {
             return null; // Or handle as needed
         }
     }
+
+    public List<Proyecto> findByIdDpto(int idDpto) {
+        String sql = "SELECT * FROM Proyectos WHERE IDDpto = ?";
+        return jdbcTemplate.query(sql, new ProyectoMapper(), idDpto);
+    }
 }
