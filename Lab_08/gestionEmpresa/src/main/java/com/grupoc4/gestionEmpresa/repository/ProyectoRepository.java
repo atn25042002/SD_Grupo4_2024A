@@ -28,7 +28,6 @@ public class ProyectoRepository {
             proyecto.setFecInicio(rs.getDate("Fec_Inicio"));
             proyecto.setFecTermino(rs.getDate("Fec_Termino"));
             proyecto.setIdDpto(rs.getInt("IDDpto"));
-            proyecto.setIdIng(rs.getInt("IDIng"));
             return proyecto;
         }
     }
@@ -48,9 +47,9 @@ public class ProyectoRepository {
     }
 
     public Proyecto save(Proyecto proyecto) {
-        String sql = "INSERT INTO Proyectos (Nombre, Fec_Inicio, Fec_Termino, IDDpto, IDIng) VALUES (?, ?, ?, ?, ?) RETURNING IDProy";
+        String sql = "INSERT INTO Proyectos (Nombre, Fec_Inicio, Fec_Termino, IDDpto) VALUES (?, ?, ?, ?) RETURNING IDProy";
         try {
-            int id = jdbcTemplate.queryForObject(sql, Integer.class, proyecto.getNombre(), proyecto.getFecInicio(), proyecto.getFecTermino(), proyecto.getIdDpto(), proyecto.getIdIng());
+            int id = jdbcTemplate.queryForObject(sql, Integer.class, proyecto.getNombre(), proyecto.getFecInicio(), proyecto.getFecTermino(), proyecto.getIdDpto());
             return findById(id);
         } catch (DataAccessException e) {
             return null; // Or handle as needed
@@ -58,9 +57,9 @@ public class ProyectoRepository {
     }
 
     public Proyecto update(Proyecto proyecto) {
-        String sql = "UPDATE Proyectos SET Nombre = ?, Fec_Inicio = ?, Fec_Termino = ?, IDDpto = ?, IDIng = ? WHERE IDProy = ?";
+        String sql = "UPDATE Proyectos SET Nombre = ?, Fec_Inicio = ?, Fec_Termino = ?, IDDpto = ? WHERE IDProy = ?";
         try {
-            jdbcTemplate.update(sql, proyecto.getNombre(), proyecto.getFecInicio(), proyecto.getFecTermino(), proyecto.getIdDpto(), proyecto.getIdIng(), proyecto.getId());
+            jdbcTemplate.update(sql, proyecto.getNombre(), proyecto.getFecInicio(), proyecto.getFecTermino(), proyecto.getIdDpto(), proyecto.getId());
             return findById(proyecto.getId());
         } catch (DataAccessException e) {
             return null; // Or handle as needed

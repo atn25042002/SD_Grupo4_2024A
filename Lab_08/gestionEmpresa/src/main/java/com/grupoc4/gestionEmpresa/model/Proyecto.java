@@ -31,7 +31,4 @@ public class Proyecto {
 
     @Column(name = "IDDpto", nullable = false)
     private Integer idDpto;
-
-    @Column(name = "IDIng", nullable = false)
-    private Integer idIng;
 }
