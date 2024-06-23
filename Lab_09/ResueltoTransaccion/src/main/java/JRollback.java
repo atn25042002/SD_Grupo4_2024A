@@ -21,8 +21,8 @@ public class JRollback {
             // se deshabilita el modo de confirmación automática
             connection.setAutoCommit(false);
             // Se preparan las sentencias SQL
-            stmt1 = connection.prepareStatement("INSERT INTO miTabla VALUES( ?, ? );");
-            stmt2 = connection.prepareStatement("INSERT INTO miOtraTabla VALUES( ?, ?, ? );");
+            stmt1 = connection.prepareStatement("INSERT INTO mitabla VALUES( ?, ? );");
+            stmt2 = connection.prepareStatement("INSERT INTO miotratabla VALUES( ?, ?, ? );");
 
             System.out.println("Primer INSERT tabla [miTabla] ");
             stmt1.setString(1, "000001");
