@@ -42,7 +42,7 @@ public class ProyectoRepository {
         try {
             return jdbcTemplate.queryForObject(sql, new ProyectoMapper(), id);
         } catch (EmptyResultDataAccessException e) {
-            return null; // Or handle as needed, e.g., throw a custom exception
+            return null; // or throw custom exception like ResourceNotFoundException
         }
     }
 
@@ -52,7 +52,7 @@ public class ProyectoRepository {
             int id = jdbcTemplate.queryForObject(sql, Integer.class, proyecto.getNombre(), proyecto.getFecInicio(), proyecto.getFecTermino(), proyecto.getIdDpto());
             return findById(id);
         } catch (DataAccessException e) {
-            return null; // Or handle as needed
+            return null; // or throw custom exception like DataIntegrityViolationException
         }
     }
 
@@ -62,7 +62,7 @@ public class ProyectoRepository {
             jdbcTemplate.update(sql, proyecto.getNombre(), proyecto.getFecInicio(), proyecto.getFecTermino(), proyecto.getIdDpto(), proyecto.getId());
             return findById(proyecto.getId());
         } catch (DataAccessException e) {
-            return null; // Or handle as needed
+            return null; // or throw custom exception like DataIntegrityViolationException
         }
     }
 
@@ -73,11 +73,11 @@ public class ProyectoRepository {
             jdbcTemplate.update(sql, id);
             return proyecto;
         } catch (DataAccessException e) {
-            return null; // Or handle as needed
+            return null; // or throw custom exception like DataIntegrityViolationException
         }
     }
 
-    public List<Proyecto> findByIdDpto(int idDpto) {
+    public List<Proyecto> findByDptoId(int idDpto) {
         String sql = "SELECT * FROM Proyectos WHERE IDDpto = ?";
         return jdbcTemplate.query(sql, new ProyectoMapper(), idDpto);
     }
