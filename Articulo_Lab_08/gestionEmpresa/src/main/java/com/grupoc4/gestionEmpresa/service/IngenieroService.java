@@ -34,10 +34,21 @@ public class IngenieroService {
     }
 
     public Ingeniero saveIngeniero(Ingeniero ingeniero) {
+        Integer idProyecto= ingeniero.getIDProy();
+        Proyecto proyecto= proyectoRepository.findById(idProyecto);
+        if (proyecto == null) {
+            throw new ResourceNotFoundException("Proyecto no encontrado con id " + idProyecto);
+        }
         return ingenieroRepository.save(ingeniero);
     }
 
     public Ingeniero updateIngeniero(Ingeniero ingeniero) {
+        Integer idProyecto= ingeniero.getIDProy();
+        Proyecto proyecto= proyectoRepository.findById(idProyecto);
+        if (proyecto == null) {
+            throw new ResourceNotFoundException("Proyecto no encontrado con id " + idProyecto);
+        }
+        
         Ingeniero updatedIngeniero = ingenieroRepository.update(ingeniero);
         if (updatedIngeniero == null) {
             throw new ResourceNotFoundException("No se pudo actualizar el ingeniero con id " + ingeniero.getId());

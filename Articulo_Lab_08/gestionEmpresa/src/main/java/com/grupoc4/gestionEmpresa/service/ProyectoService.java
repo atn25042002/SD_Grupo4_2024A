@@ -34,10 +34,21 @@ public class ProyectoService {
     }
 
     public Proyecto saveProyecto(Proyecto proyecto) {
+        Integer idDpto= proyecto.getIdDpto();
+        Departamento departamento= departamentoRepository.findById(idDpto);
+        if (departamento == null) {
+            throw new ResourceNotFoundException("Departamento no encontrado con id " + idDpto);
+        }
         return proyectoRepository.save(proyecto);
     }
 
     public Proyecto updateProyecto(Proyecto proyecto) {
+        Integer idDpto= proyecto.getId();
+        Departamento departamento= departamentoRepository.findById(idDpto);
+        if (departamento == null) {
+            throw new ResourceNotFoundException("Departamento no encontrado con id " + idDpto);
+        }
+
         Proyecto updatedProyecto = proyectoRepository.update(proyecto);
         if (updatedProyecto == null) {
             throw new ResourceNotFoundException("No se pudo actualizar el proyecto con id " + proyecto.getId());
