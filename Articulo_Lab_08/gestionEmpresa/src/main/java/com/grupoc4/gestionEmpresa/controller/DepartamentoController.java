@@ -1,6 +1,8 @@
 package com.grupoc4.gestionEmpresa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.grupoc4.gestionEmpresa.model.Departamento;
@@ -16,29 +18,34 @@ public class DepartamentoController {
     @Autowired
     private DepartamentoService departamentoService;
 
-    @GetMapping("")
-    public List<Departamento> getAllDepartamentos() {
-        return departamentoService.getAllDepartamentos();
+    @GetMapping
+    public ResponseEntity<List<Departamento>> getAllDepartamentos() {
+        List<Departamento> departamentos = departamentoService.getAllDepartamentos();
+        return new ResponseEntity<>(departamentos, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Departamento getDepartamentoById(@PathVariable Integer id) {
-        return departamentoService.getDepartamentoById(id);
+    public ResponseEntity<Departamento> getDepartamentoById(@PathVariable int id) {
+        Departamento departamento = departamentoService.getDepartamentoById(id);
+        return new ResponseEntity<>(departamento, HttpStatus.OK);
     }
 
-    @PostMapping("")
-    public Departamento createDepartamento(@RequestBody Departamento departamento) {
-        return departamentoService.saveDepartamento(departamento);
+    @PostMapping
+    public ResponseEntity<Departamento> createDepartamento(@RequestBody Departamento departamento) {
+        Departamento createdDepartamento = departamentoService.saveDepartamento(departamento);
+        return new ResponseEntity<>(createdDepartamento, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public Departamento updateDepartamento(@PathVariable Integer id, @RequestBody Departamento departamento) {
+    public ResponseEntity<Departamento> updateDepartamento(@PathVariable int id, @RequestBody Departamento departamento) {
         departamento.setId(id);
-        return departamentoService.updateDepartamento(departamento);
+        Departamento updatedDepartamento = departamentoService.updateDepartamento(departamento);
+        return new ResponseEntity<>(updatedDepartamento, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public Departamento deleteDepartamentoById(@PathVariable Integer id) {
-        return departamentoService.deleteDepartamentoById(id);
+    public ResponseEntity<Void> deleteDepartamento(@PathVariable int id) {
+        departamentoService.deleteDepartamentoById(id);
+        return ResponseEntity.ok().build();
     }
 }

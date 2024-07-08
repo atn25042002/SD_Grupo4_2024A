@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.grupoc4.gestionEmpresa.error.ResourceNotFoundException;
 import com.grupoc4.gestionEmpresa.model.Departamento;
 
 import java.sql.ResultSet;
@@ -41,45 +42,46 @@ public class DepartamentoRepository {
         try {
             return jdbcTemplate.queryForObject(sql, new DepartamentoMapper(), id);
         } catch (EmptyResultDataAccessException e) {
-            return new Departamento();
+            throw new ResourceNotFoundException("Departamento no encontrado con id " + id);
         }
     }
 
     public Departamento save(Departamento departamento) {
         String sql = "INSERT INTO Departamentos (Nombre, Telefono, Fax) VALUES (?, ?, ?) RETURNING IDDpto";
         try {
-            int lid= jdbcTemplate.queryForObject(sql, Integer.class ,departamento.getNombre(), departamento.getTelefono(), departamento.getFax());
+            int lid = jdbcTemplate.queryForObject(sql, Integer.class, departamento.getNombre(), departamento.getTelefono(), departamento.getFax());
             return findById(lid);
         } catch (DataAccessException e) {
-            return new Departamento();
-        }        
+            throw new RuntimeException("Error al guardar el departamento", e);
+        }
     }
 
     public Departamento update(Departamento departamento) {
         String sql = "UPDATE Departamentos SET Nombre = ?, Telefono = ?, Fax = ? WHERE IDDpto = ?";
         try {
-            int lid= jdbcTemplate.update(sql, departamento.getNombre(), departamento.getTelefono(), departamento.getFax(), departamento.getId());
-            Departamento response= findById(departamento.getId());
-            if(lid > 0){
-                return response;
+            int lid = jdbcTemplate.update(sql, departamento.getNombre(), departamento.getTelefono(), departamento.getFax(), departamento.getId());
+            if (lid > 0) {
+                return findById(departamento.getId());
+            } else {
+                throw new ResourceNotFoundException("Departamento no encontrado con id " + departamento.getId());
             }
-            return new Departamento();
         } catch (DataAccessException e) {
-            return new Departamento();
-        } 
+            throw new RuntimeException("Error al actualizar el departamento", e);
+        }
     }
 
     public Departamento deleteById(int id) {
+        Departamento departamento = findById(id);
         String sql = "DELETE FROM Departamentos WHERE IDDpto = ?";
         try {
-            Departamento response= findById(id);
-            int lid= jdbcTemplate.update(sql, id);
-            if(lid > 0){
-                return response;
+            int lid = jdbcTemplate.update(sql, id);
+            if (lid > 0) {
+                return departamento;
+            } else {
+                throw new ResourceNotFoundException("Departamento no encontrado con id " + id);
             }
-            return new Departamento();
         } catch (DataAccessException e) {
-            return new Departamento();
-        }         
+            throw new RuntimeException("Error al eliminar el departamento", e);
+        }
     }
 }
