@@ -27,4 +27,7 @@ public class Ingeniero {
 
     @Column(name = "Cargo", nullable = false)
     private String cargo;
+
+    @Column(name = "IDProy", nullable = false)
+    private Integer IDProy;
 }

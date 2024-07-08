@@ -6,14 +6,6 @@ CREATE TABLE Departamentos (
     Fax VARCHAR(15)
 );
 
--- Creación de la tabla Ingenieros
-CREATE TABLE Ingenieros (
-    IDIng SERIAL PRIMARY KEY,
-    Nombre VARCHAR(255) NOT NULL,
-    Especialidad VARCHAR(255) NOT NULL,
-    Cargo VARCHAR(255) NOT NULL
-);
-
 -- Creación de la tabla Proyectos
 CREATE TABLE Proyectos (
     IDProy SERIAL PRIMARY KEY,
@@ -26,17 +18,16 @@ CREATE TABLE Proyectos (
         REFERENCES Departamentos(IDDpto)
 );
 
--- Creación de la tabla Proyecto_Ingeniero
-CREATE TABLE Proyecto_Ingeniero (
-    IDProy INTEGER NOT NULL,
-    IDIng INTEGER NOT NULL,
-    PRIMARY KEY (IDProy, IDIng),
+-- Creación de la tabla Ingenieros
+CREATE TABLE Ingenieros (
+    IDIng SERIAL PRIMARY KEY,
+    Nombre VARCHAR(255) NOT NULL,
+    Especialidad VARCHAR(255) NOT NULL,
+    Cargo VARCHAR(255) NOT NULL,
+    IDProy INTEGER,
     CONSTRAINT fk_proyecto
         FOREIGN KEY(IDProy) 
-        REFERENCES Proyectos(IDProy),
-    CONSTRAINT fk_ingeniero
-        FOREIGN KEY(IDIng)
-        REFERENCES Ingenieros(IDIng)
+        REFERENCES Proyectos(IDProy)
 );
 
 -- Creación de índices
@@ -59,13 +50,13 @@ END;
 $$;
 
 -- Sentencias preparadas
-PREPARE insertar_ingeniero (VARCHAR, VARCHAR, VARCHAR) AS
-    INSERT INTO Ingenieros (Nombre, Especialidad, Cargo) VALUES ($1, $2, $3);
+PREPARE insertar_ingeniero (VARCHAR, VARCHAR, VARCHAR, INTEGER) AS
+    INSERT INTO Ingenieros (Nombre, Especialidad, Cargo, IDProy) VALUES ($1, $2, $3, $4);
 
 PREPARE insertar_departamento (VARCHAR, VARCHAR, VARCHAR) AS
     INSERT INTO Departamentos (Nombre, Telefono, Fax) VALUES ($1, $2, $3);
 
-PREPARE insertar_proyecto (VARCHAR, DATE, DATE, INTEGER, INTEGER) AS
+PREPARE insertar_proyecto (VARCHAR, DATE, DATE, INTEGER) AS
     INSERT INTO Proyectos (Nombre, Fec_Inicio, Fec_Termino, IDDpto) VALUES ($1, $2, $3, $4);
 
 -- Restricciones adicionales para mantener la consistencia de los datos
@@ -78,20 +69,14 @@ INSERT INTO Departamentos (Nombre, Telefono, Fax) VALUES ('Recursos Humanos', '1
 INSERT INTO Departamentos (Nombre, Telefono, Fax) VALUES ('Tecnología', '123-456-7892', '123-456-7893');
 INSERT INTO Departamentos (Nombre, Telefono, Fax) VALUES ('Marketing', '123-456-7894', '123-456-7895');
 
--- Insertar registros en la tabla Ingenieros
-INSERT INTO Ingenieros (Nombre, Especialidad, Cargo) VALUES ('Juan Perez', 'Software', 'Desarrollador');
-INSERT INTO Ingenieros (Nombre, Especialidad, Cargo) VALUES ('Maria Lopez', 'Redes', 'Administrador');
-INSERT INTO Ingenieros (Nombre, Especialidad, Cargo) VALUES ('Carlos Sanchez', 'Base de Datos', 'DBA');
-INSERT INTO Ingenieros (Nombre, Especialidad, Cargo) VALUES ('Ana Martinez', 'Seguridad', 'Analista de Seguridad');
-
 -- Insertar registros en la tabla Proyectos
 INSERT INTO Proyectos (Nombre, Fec_Inicio, Fec_Termino, IDDpto) VALUES ('Sistema de Gestión', '2024-01-01', '2024-06-30', 2);
 INSERT INTO Proyectos (Nombre, Fec_Inicio, Fec_Termino, IDDpto) VALUES ('Redes Corporativas', '2024-02-01', '2024-07-31', 2);
 INSERT INTO Proyectos (Nombre, Fec_Inicio, Fec_Termino, IDDpto) VALUES ('Marketing Digital', '2024-03-01', NULL, 3);
 INSERT INTO Proyectos (Nombre, Fec_Inicio, Fec_Termino, IDDpto) VALUES ('Auditoría de Seguridad', '2024-04-01', '2024-12-31', 1);
 
--- Asignar ingenieros a proyectos en la tabla Proyecto_Ingeniero
-INSERT INTO Proyecto_Ingeniero (IDProy, IDIng) VALUES (1, 1);
-INSERT INTO Proyecto_Ingeniero (IDProy, IDIng) VALUES (2, 2);
-INSERT INTO Proyecto_Ingeniero (IDProy, IDIng) VALUES (3, 3);
-INSERT INTO Proyecto_Ingeniero (IDProy, IDIng) VALUES (4, 4);
+-- Insertar registros en la tabla Ingenieros
+INSERT INTO Ingenieros (Nombre, Especialidad, Cargo, IDProy) VALUES ('Juan Perez', 'Software', 'Desarrollador', 1);
+INSERT INTO Ingenieros (Nombre, Especialidad, Cargo, IDProy) VALUES ('Maria Lopez', 'Redes', 'Administrador', 2);
+INSERT INTO Ingenieros (Nombre, Especialidad, Cargo, IDProy) VALUES ('Carlos Sanchez', 'Base de Datos', 'DBA', 3);
+INSERT INTO Ingenieros (Nombre, Especialidad, Cargo, IDProy) VALUES ('Ana Martinez', 'Seguridad', 'Analista de Seguridad', 3);

@@ -35,4 +35,8 @@ public class IngenieroService {
     public Ingeniero deleteIngenieroById(int id) {
         return ingenieroRepository.deleteById(id);
     }
+
+    public List<Ingeniero> getIngenierosByProyecto(int idProy) {
+        return ingenieroRepository.findByIdProy(idProy);
+    }
 }

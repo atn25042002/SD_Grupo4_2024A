@@ -27,6 +27,7 @@ public class IngenieroRepository {
             ingeniero.setNombre(rs.getString("Nombre"));
             ingeniero.setEspecialidad(rs.getString("Especialidad"));
             ingeniero.setCargo(rs.getString("Cargo"));
+            ingeniero.setIDProy(rs.getInt("IDProy"));
             return ingeniero;
         }
     }
@@ -46,9 +47,9 @@ public class IngenieroRepository {
     }
 
     public Ingeniero save(Ingeniero ingeniero) {
-        String sql = "INSERT INTO Ingenieros (Nombre, Especialidad, Cargo) VALUES (?, ?, ?) RETURNING IDIng";
+        String sql = "INSERT INTO Ingenieros (Nombre, Especialidad, Cargo, IDProy) VALUES (?, ?, ?, ?) RETURNING IDIng";
         try {
-            int id = jdbcTemplate.queryForObject(sql, Integer.class, ingeniero.getNombre(), ingeniero.getEspecialidad(), ingeniero.getCargo());
+            int id = jdbcTemplate.queryForObject(sql, Integer.class, ingeniero.getNombre(), ingeniero.getEspecialidad(), ingeniero.getCargo(), ingeniero.getIDProy());
             return findById(id);
         } catch (DataAccessException e) {
             return null; // Or handle as needed
@@ -56,9 +57,9 @@ public class IngenieroRepository {
     }
 
     public Ingeniero update(Ingeniero ingeniero) {
-        String sql = "UPDATE Ingenieros SET Nombre = ?, Especialidad = ?, Cargo = ? WHERE IDIng = ?";
+        String sql = "UPDATE Ingenieros SET Nombre = ?, Especialidad = ?, Cargo = ?, IDProy = ? WHERE IDIng = ?";
         try {
-            jdbcTemplate.update(sql, ingeniero.getNombre(), ingeniero.getEspecialidad(), ingeniero.getCargo(), ingeniero.getId());
+            jdbcTemplate.update(sql, ingeniero.getNombre(), ingeniero.getEspecialidad(), ingeniero.getCargo(), ingeniero.getIDProy(), ingeniero.getId());
             return findById(ingeniero.getId());
         } catch (DataAccessException e) {
             return null; // Or handle as needed
@@ -74,5 +75,10 @@ public class IngenieroRepository {
         } catch (DataAccessException e) {
             return null; // Or handle as needed
         }
+    }
+
+    public List<Ingeniero> findByIdProy(int idProy) {
+        String sql = "SELECT * FROM Ingenieros WHERE IDProy = ?";
+        return jdbcTemplate.query(sql, new IngenieroMapper(), idProy);
     }
 }

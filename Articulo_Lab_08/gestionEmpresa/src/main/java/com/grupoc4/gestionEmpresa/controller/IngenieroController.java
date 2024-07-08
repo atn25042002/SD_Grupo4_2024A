@@ -41,4 +41,9 @@ public class IngenieroController {
     public Ingeniero deleteIngenieroById(@PathVariable Integer id) {
         return ingenieroService.deleteIngenieroById(id);
     }
+
+    @GetMapping("/proyecto/{idProy}")
+    public List<Ingeniero> getIngenierosByProyecto(@PathVariable Integer idProy) {
+        return ingenieroService.getIngenierosByProyecto(idProy);
+    }
 }
