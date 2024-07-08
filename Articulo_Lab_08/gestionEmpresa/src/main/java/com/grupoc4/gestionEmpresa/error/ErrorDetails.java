@@ -18,6 +18,4 @@ public class ErrorDetails {
         this.message = message;
         this.details = details;
     }
-
-    // Getters y setters
 }
