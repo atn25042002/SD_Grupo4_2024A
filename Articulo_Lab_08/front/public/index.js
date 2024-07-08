@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const btnDepartamentos = document.getElementById("btn-departamentos");
     const btnProyectos = document.getElementById("btn-proyectos");
     const btnIngenieros = document.getElementById("btn-ingenieros");
-
+    const btnIngenierosProyecto = document.getElementById("btn-buscarIngenieros");
+                        
     // Selecciona las secciones de contenido
     const sectionDepartamentos = document.getElementById("departamentos-section");
     const sectionProyectos = document.getElementById("proyectos-section");
@@ -47,6 +48,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     btnIngenieros.addEventListener("click", function() {
         changeSection({ section: sectionIngenieros, button: btnIngenieros, endPoint: "ingenieros" });
+    });
+
+    btnIngenierosProyecto.addEventListener("click", function() {
+        let idProyecto = document.getElementById('input-searchIngenieros').value;
+        loadIngenierosByProject(idProyecto, "ingenieros");
     });
 
     // Manejar el evento de clic en los botones "Añadir"
@@ -327,4 +333,28 @@ function onClickButtonUpdateEntity(element, endPoint) {
     saveEntityBtn.dataset.edit = true;
     saveEntityBtn.dataset.entityType = endPoint;
     saveEntityBtn.dataset.id = element;
+}
+
+function loadIngenierosByProject(id, endPoint) {
+    fetch(`http://localhost:8080/gestionEmpresa/${endPoint}/proyecto/${id}`, {
+        mode: 'cors',
+        method: 'GET',
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new error("error en la solicitud al servidor");
+    })
+    .then(data => {
+        registers = [];
+        data.forEach(element => {
+            registers[element.id] = element;
+        });
+        reloadSection(endPoint);
+    })
+    .catch(error => {
+        console.log(error);
+        alert("error al cargar los ingenieros del proyecto");
+    })
 }
