@@ -42,7 +42,7 @@ public class IngenieroRepository {
         try {
             return jdbcTemplate.queryForObject(sql, new IngenieroMapper(), id);
         } catch (EmptyResultDataAccessException e) {
-            return null;
+            return null; // or throw custom exception like ResourceNotFoundException
         }
     }
 
@@ -52,7 +52,7 @@ public class IngenieroRepository {
             int id = jdbcTemplate.queryForObject(sql, Integer.class, ingeniero.getNombre(), ingeniero.getEspecialidad(), ingeniero.getCargo(), ingeniero.getIDProy());
             return findById(id);
         } catch (DataAccessException e) {
-            return null; // Or handle as needed
+            return null; // or throw custom exception like DataIntegrityViolationException
         }
     }
 
@@ -62,7 +62,7 @@ public class IngenieroRepository {
             jdbcTemplate.update(sql, ingeniero.getNombre(), ingeniero.getEspecialidad(), ingeniero.getCargo(), ingeniero.getIDProy(), ingeniero.getId());
             return findById(ingeniero.getId());
         } catch (DataAccessException e) {
-            return null; // Or handle as needed
+            return null; // or throw custom exception like DataIntegrityViolationException
         }
     }
 
@@ -73,7 +73,7 @@ public class IngenieroRepository {
             jdbcTemplate.update(sql, id);
             return ingeniero;
         } catch (DataAccessException e) {
-            return null; // Or handle as needed
+            return null; // or throw custom exception like DataIntegrityViolationException
         }
     }
 

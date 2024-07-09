@@ -19,7 +19,7 @@ public class Departamento {
     @Column(name = "IDDpto")
     private Integer id;
 
-    @Column(name = "Nombre")
+    @Column(name = "Nombre", nullable = false)
     private String nombre;
 
     @Column(name = "Telefono")
