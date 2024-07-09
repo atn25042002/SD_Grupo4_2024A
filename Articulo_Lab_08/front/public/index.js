@@ -136,7 +136,7 @@ function loadSection(seccion, endPoint) {
         if (response.ok) {
             return response.json();
         }
-        throw new error("error en la solicitud al servidor");
+        throw new Error("error en la solicitud al servidor");
     })
     .then(data => {
         let tbody = seccion.getElementsByTagName("tbody")[0];
@@ -146,7 +146,6 @@ function loadSection(seccion, endPoint) {
         data.forEach(element => {
             registers[element.id] = element;
         });
-        console.log(registers);
         reloadSection(endPoint);
     })
     .catch(error => {
@@ -346,7 +345,7 @@ function loadIngenierosByProject(id, endPoint) {
         if (response.ok) {
             return response.json();
         }
-        throw new error("error en la solicitud al servidor");
+        throw new Error("error en la solicitud al servidor");
     })
     .then(data => {
         registers = [];
