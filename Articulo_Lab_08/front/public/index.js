@@ -218,20 +218,17 @@ function deleteEntity(id, section) {
         if (response.ok) {
             return response.json();
         }
-        throw new error("error en la solicitud al servidor");
+        return response.json().then(errorInfo => {
+            throw new Error(errorInfo.message);
+        });
     })
     .then(data => {
-        if (data.nombre == null) {
-            throw new error("error en la solicitud al servidor");
-        }
-
         delete registers[id];
         reloadSection(section);
         alert(`${data.nombre} eliminado con exito`);
     })
     .catch(error => {
-        console.log(error);
-        alert("Error al borrar " + section)
+        alert(error);
     })
 }
 
