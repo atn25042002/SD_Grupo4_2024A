@@ -109,7 +109,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 entityData = {
                     nombre: document.getElementById("entity-name").value,
                     especialidad: document.getElementById("entity-specialty").value,
-                    cargo: document.getElementById("entity-cargo").value
+                    cargo: document.getElementById("entity-cargo").value,
+                    idproy: document.getElementById("entity-proyecto").value
                 };
                 break;
         }
@@ -319,6 +320,10 @@ function changeModalForEntity(entityType, modalContent, edit = false, id = -1) {
                 <div class="form-group">
                     <label for="entity-cargo">Cargo</label>
                     <input type="text" class="form-control" id="entity-cargo" ${edit ? "value='"+ entity.cargo+ "'": ""} required>
+                </div>
+                <div class="form-group">
+                    <label for="entity-proyecto">ID Proyecto</label>
+                    <input type="text" class="form-control" id="entity-proyecto" ${edit ? "value='"+ entity.idproy+ "'": ""} required>
                 </div>
             `;
             break;
